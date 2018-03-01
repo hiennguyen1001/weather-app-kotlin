@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="Typo">
+
+    <data>
+
+        <import type="hiennguyen.me.weatherapp.data.models.ActionType" />
+        <import type="hiennguyen.me.weatherapp.R"/>
+
+        <variable
+            name="region"
+            type="hiennguyen.me.weatherapp.data.models.Region" />
+
+        <variable
+            name="actionHandler"
+            type="hiennguyen.me.bindingadapterdelegate.actionhandler.listener.ActionClickListener"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:actionHandler="@{actionHandler}"
+        app:actionType="@{ActionType.OPEN_URL}"
+        app:model="@{region}">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="8dp"
+            app:imageRes="@{region.flagResId}"
+            tools:src="@drawable/ic_my_city"
+            app:civ_border_width="0.5dp"
+            app:civ_border_color="@color/black_effective"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black_effective"
+            android:textSize="16sp"
+            android:text="@{region.regionName}"
+            tools:text="My City" />
+    </LinearLayout>
+
+</layout>
