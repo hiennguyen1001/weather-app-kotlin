@@ -20,7 +20,7 @@ interface Navigator {
 
     fun startActivity(activityClass: Class<out Activity>)
 
-    fun startActivity(activityClass: Class<out Activity>, setArgsAction: ((Intent) -> Unit)?)
+    fun startActivity(activityClass: Class<out Activity>, setArgsAction: ((intent: Intent) -> Unit)? = null)
 
     fun startActivity(activityClass: Class<out Activity>, args: Bundle)
 
@@ -32,7 +32,7 @@ interface Navigator {
 
     fun startActivityForResult(activityClass: Class<out Activity>, requestCode: Int)
 
-    fun startActivityForResult(activityClass: Class<out Activity>, setArgsAction: ((Intent) -> Unit)?, requestCode: Int)
+    fun startActivityForResult(activityClass: Class<out Activity>, setArgsAction: ((intent: Intent) -> Unit)? = null, requestCode: Int)
 
     fun startActivityForResult(activityClass: Class<out Activity>, arg: Parcelable, requestCode: Int)
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Architecture Component Example</string>
+    <string name="app_name">Weather App</string>
 
     <!--Drawer-->
     <string name="open_drawer">Drawer Open</string>

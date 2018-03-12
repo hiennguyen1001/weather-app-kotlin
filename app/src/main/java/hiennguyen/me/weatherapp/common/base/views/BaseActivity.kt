@@ -13,7 +13,7 @@ import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
 
-abstract class BaseActivity<V : ViewDataBinding, M : BaseViewModel>: DaggerAppCompatActivity() {
+abstract class BaseActivity<V : ViewDataBinding, M : BaseViewModel> : DaggerAppCompatActivity() {
 
     protected lateinit var binding: V
     protected lateinit var viewModel: M

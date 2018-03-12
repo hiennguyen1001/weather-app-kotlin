@@ -39,9 +39,4 @@ class BaseActivityModule {
     fun provideFragmentManager(activity: FragmentActivity): FragmentManager {
         return activity.supportFragmentManager
     }
-
-//    companion object {
-//        const val ACTIVITY_FRAGMENT_MANAGER = "BaseActivityModule.activityFragmentManager"
-//
-//    }
 }

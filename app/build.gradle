@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply from: 'dependencies.gradle'
 apply plugin: 'realm-android'
 
 apply plugin: 'kotlin-android'
@@ -7,22 +6,46 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion Versions.compileSdkVersion
+    buildToolsVersion Versions.buildToolsVersion
     defaultConfig {
-        applicationId "hiennguyen.me.androidtechpresent"
-        minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        applicationId Configs.appId
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        versionCode Configs.versionCode
+        versionName Configs.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
+
+        buildConfigField "String", "BASE_ENDPOINT", "\"https://api.openweathermap.org/data/2.5/\""
+
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_TOOLCHAIN=clang'
+            }
+        }
     }
+
+    dexOptions {
+        maxProcessCount 2
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    configurations{
+        ktlint
+    }
+
+    androidExtensions {
+        experimental = true
     }
 
     compileOptions {
@@ -33,24 +56,39 @@ android {
     dataBinding {
         enabled = true
     }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/jni/CMakeLists.txt"
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$Versions.kotlin_version"
+    implementation Deps.supportDeps
+    implementation Deps.archDeps
+    implementation Deps.dagger
+    implementation Deps.reactiveX
+    implementation Deps.networking
+    implementation Deps.otherLibs
+    ktlint Deps.ktlint
 
-    implementation supportLibs
-    implementation archLibs
-    implementation daggerLibs
-    implementation rxJavaLibs
-    implementation networkingLibs
-    implementation otherLibs
+    debugImplementation Deps.onlyDebug
+    releaseImplementation Deps.onlyRelease
 
-    debugImplementation onlyDebugLibs
-    releaseImplementation onlyReleaseLibs
+    kapt Deps.annotationProccessor
 
-    kapt annotationProccessorLibs
-
-    testImplementation unitTestLibs
-    androidTestImplementation androidTestLibs
+    testImplementation Deps.unitTest
+    androidTestImplementation Deps.androidTest
 }
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "src/**/*.kt"
+    // args "--reporter=checkstyle, output=${buildDir}/ktlint.xml
+}
+

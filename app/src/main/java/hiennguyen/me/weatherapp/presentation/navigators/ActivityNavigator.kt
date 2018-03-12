@@ -32,31 +32,31 @@ constructor(private val activity: FragmentActivity?) : Navigator {
     }
 
     override fun startActivity(activityClass: Class<out Activity>) {
-        startActivityInternal(activityClass, null, null)
+        startActivityInternal(activityClass)
     }
 
-    override fun startActivity(activityClass: Class<out Activity>, setArgsAction: ((Intent) -> Unit)?) {
-        startActivityInternal(activityClass, setArgsAction, null)
+    override fun startActivity(activityClass: Class<out Activity>, setArgsAction: ((intent: Intent) -> Unit)?) {
+        startActivityInternal(activityClass, setArgsAction)
     }
 
     override fun startActivity(activityClass: Class<out Activity>, args: Bundle) {
-        startActivityInternal(activityClass, { intent -> intent.putExtra(Navigator.EXTRA_ARG, args) }, null)
+        startActivityInternal(activityClass, { intent -> intent.putExtra(Navigator.EXTRA_ARG, args) })
     }
 
     override fun startActivity(activityClass: Class<out Activity>, args: Parcelable) {
-        startActivityInternal(activityClass, { intent -> intent.putExtra(Navigator.EXTRA_ARG, args) }, null)
+        startActivityInternal(activityClass, { intent -> intent.putExtra(Navigator.EXTRA_ARG, args) })
     }
 
     override fun startActivity(activityClass: Class<out Activity>, arg: String) {
-        startActivityInternal(activityClass, { intent -> intent.putExtra(Navigator.EXTRA_ARG, arg) }, null)
+        startActivityInternal(activityClass, { intent -> intent.putExtra(Navigator.EXTRA_ARG, arg) })
     }
 
     override fun startActivity(activityClass: Class<out Activity>, arg: Int) {
-        startActivityInternal(activityClass, { intent -> intent.putExtra(Navigator.EXTRA_ARG, arg) }, null)
+        startActivityInternal(activityClass, { intent -> intent.putExtra(Navigator.EXTRA_ARG, arg) })
     }
 
     override fun startActivityForResult(activityClass: Class<out Activity>, requestCode: Int) {
-        startActivityInternal(activityClass, null, requestCode)
+        startActivityInternal(activityClass, requestCode = requestCode)
     }
 
     override fun startActivityForResult(activityClass: Class<out Activity>, setArgsAction: ((Intent) -> Unit)?, requestCode: Int) {
@@ -76,17 +76,16 @@ constructor(private val activity: FragmentActivity?) : Navigator {
     }
 
     override fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, args: Bundle) {
-        replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, null, args, false, null)
+        replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, args = args)
     }
 
-    override fun replaceFragment(@IdRes containerId: Int, fragment: Fragment,
-                                 fragmentTag: String, args: Bundle) {
-        replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, fragmentTag, args, false, null)
+    override fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String, args: Bundle) {
+        replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, fragmentTag, args)
     }
 
     override fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment,
                                                   args: Bundle, backstackTag: String) {
-        replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, null, args, true, backstackTag)
+        replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, args = args, addToBackstack = true, backstackTag = backstackTag)
     }
 
     override fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment,
@@ -94,11 +93,10 @@ constructor(private val activity: FragmentActivity?) : Navigator {
         replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, fragmentTag, args, true, backstackTag)
     }
 
-    internal fun replaceFragmentInternal(fm: FragmentManager?, @IdRes containerId: Int, fragment: Fragment,
-                                         fragmentTag: String?, args: Bundle?, addToBackstack: Boolean, backstackTag: String?) {
-        if (args != null) {
-            fragment.arguments = args
-        }
+    internal fun replaceFragmentInternal(fm: FragmentManager?, @IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null,
+                                         args: Bundle? = null, addToBackstack: Boolean = false, backstackTag: String? = "") {
+
+        args?.let { fragment.arguments = it }
 
         val ft = fm?.beginTransaction()?.replace(containerId, fragment, fragmentTag)
         if (addToBackstack) {
@@ -109,14 +107,13 @@ constructor(private val activity: FragmentActivity?) : Navigator {
         }
     }
 
-    private fun startActivityInternal(activityClass: Class<out Activity>, setArgsAction: ((Intent) -> Unit)?, requestCode: Int?) {
+    private fun startActivityInternal(activityClass: Class<out Activity>, setArgsAction: ((intent: Intent) -> Unit)? = null,
+                                      requestCode: Int? = null) {
         val intent = Intent(activity, activityClass)
         setArgsAction?.invoke(intent)
 
-        if (requestCode != null) {
-            activity?.startActivityForResult(intent, requestCode)
-        } else {
-            activity?.startActivity(intent)
-        }
+        requestCode?.let {
+            activity?.startActivityForResult(intent, it)
+        } ?: activity?.startActivity(intent)
     }
 }
