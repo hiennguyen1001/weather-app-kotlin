@@ -7,6 +7,7 @@ import Versions.glide
 import Versions.gson
 import Versions.leakCanary
 import Versions.multiDex
+import Versions.objectboxVersion
 import Versions.okHttp
 import Versions.retrofit
 import Versions.rxAndroid
@@ -36,6 +37,7 @@ object Versions {
     val rxJava = "2.1.8"
     val rxAndroid = "2.0.1"
     val leakCanary = "1.5.4"
+    val objectboxVersion = "1.4.4"
 
 
     val junit = "4.12"
@@ -75,6 +77,9 @@ object Deps {
             "io.reactivex.rxjava2:rxandroid:$rxAndroid",
             "io.reactivex.rxjava2:rxjava:$rxJava")
 
+    val objectBox = arrayOf("io.objectbox:objectbox-android:$objectboxVersion"
+            , "io.objectbox:objectbox-kotlin:$objectboxVersion")
+
     val glideLibs = "com.github.bumptech.glide:glide:$glide"
     val glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$glide"
     val timberLib = "com.jakewharton.timber:timber:$timber"
@@ -93,7 +98,8 @@ object Deps {
             , "com.google.dagger:dagger-compiler:$dagger2"
             , "com.google.dagger:dagger-android-processor:$dagger2"
             , "com.github.bumptech.glide:compiler:$glide"
-            , "com.android.databinding:compiler:3.0.1")
+            , "com.android.databinding:compiler:3.0.1"
+            , "io.objectbox:objectbox-processor:$objectboxVersion")
 
     val unitTest = arrayOf("junit:junit:${Versions.junit}")
 

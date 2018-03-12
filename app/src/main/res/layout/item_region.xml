@@ -7,7 +7,7 @@
 
     <data>
 
-        <import type="hiennguyen.me.weatherapp.data.models.ActionType" />
+        <import type="hiennguyen.me.weatherapp.common.binding.ActionType" />
         <import type="hiennguyen.me.weatherapp.R"/>
 
         <variable

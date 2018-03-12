@@ -9,7 +9,7 @@ import android.view.View
 import hiennguyen.me.weatherapp.BR
 import hiennguyen.me.weatherapp.R
 import hiennguyen.me.weatherapp.common.base.views.BaseActivity
-import hiennguyen.me.weatherapp.data.models.ActionType
+import hiennguyen.me.weatherapp.common.binding.ActionType
 import hiennguyen.me.weatherapp.data.models.Region
 import hiennguyen.me.weatherapp.databinding.ActivityHomeBinding
 import hiennguyen.me.weatherapp.presentation.home.viewmodels.HomeViewModel

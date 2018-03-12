@@ -7,5 +7,5 @@ object NativeConnector {
         System.loadLibrary("urls")
     }
 
-    external fun getWeatherApiKey() : String
+    external fun getApiKey() : String
 }

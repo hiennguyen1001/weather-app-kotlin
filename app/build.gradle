@@ -1,9 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
-
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion Versions.compileSdkVersion
@@ -73,6 +72,7 @@ dependencies {
     implementation Deps.reactiveX
     implementation Deps.networking
     implementation Deps.otherLibs
+    implementation Deps.objectBox
     ktlint Deps.ktlint
 
     debugImplementation Deps.onlyDebug

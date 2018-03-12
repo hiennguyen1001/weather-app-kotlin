@@ -9,7 +9,8 @@ import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import hiennguyen.me.weatherapp.common.injection.components.DaggerAppComponent
-import io.realm.Realm
+import io.objectbox.BoxStore
+import io.objectbox.android.AndroidObjectBrowser
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,10 +22,12 @@ class WeatherApp : MultiDexApplication(), HasActivityInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
+    @Inject
+    lateinit var boxStore: BoxStore
+
     override fun onCreate() {
         super.onCreate()
         app = this
-        Realm.init(this)
         DaggerAppComponent
                 .builder()
                 .application(this)
@@ -34,6 +37,7 @@ class WeatherApp : MultiDexApplication(), HasActivityInjector {
             Timber.plant(Timber.DebugTree())
             Stetho.initializeWithDefaults(this)
             LeakCanary.install(this)
+            AndroidObjectBrowser(boxStore).start(this)
         }
     }
 

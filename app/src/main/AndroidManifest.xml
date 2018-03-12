@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hiennguyen.me.weatherapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="hiennguyen.me.weatherapp.WeatherApp"
         android:allowBackup="true"

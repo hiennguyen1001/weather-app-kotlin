@@ -5,9 +5,11 @@ import android.content.Context
 import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
-import hiennguyen.me.weatherapp.data.realm.RealmModules
+import hiennguyen.me.weatherapp.BuildConfig
+import hiennguyen.me.weatherapp.data.models.remote.MyObjectBox
 import hiennguyen.me.weatherapp.utils.Config
-import io.realm.RealmConfiguration
+import io.objectbox.BoxStore
+import io.objectbox.android.AndroidObjectBrowser
 import javax.inject.Singleton
 
 
@@ -28,12 +30,11 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideConfiguration(): RealmConfiguration {
-        return RealmConfiguration.Builder()
-                .name(Config.DATABASE_NAME)
-                .schemaVersion(Config.DATABASE_VERSION)
-                .modules(RealmModules())
-                .deleteRealmIfMigrationNeeded()
+    fun provideObjectBoxStore(app: Application): BoxStore {
+        return MyObjectBox.builder().debugRelations()
+                .androidContext(app)
                 .build()
     }
+
+
 }
