@@ -9,6 +9,7 @@ import Versions.leakCanary
 import Versions.multiDex
 import Versions.objectboxVersion
 import Versions.okHttp
+import Versions.playServicesVersion
 import Versions.retrofit
 import Versions.rxAndroid
 import Versions.rxJava
@@ -38,6 +39,7 @@ object Versions {
     val rxAndroid = "2.0.1"
     val leakCanary = "1.5.4"
     val objectboxVersion = "1.4.4"
+    val playServicesVersion = "12.0.0"
 
 
     val junit = "4.12"
@@ -107,4 +109,6 @@ object Deps {
             , "com.android.support.test.espresso:espresso-core:$espresso")
 
     val otherLibs = arrayOf(glideLibs, glideOkhttp, timberLib, bindingList, circleimage)
+    val placeLib = "com.google.android.gms:play-services-places:$playServicesVersion"
+    val playServiceLibs = arrayOf(placeLib)
 }

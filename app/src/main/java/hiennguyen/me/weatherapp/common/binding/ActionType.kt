@@ -2,7 +2,7 @@ package hiennguyen.me.weatherapp.common.binding
 
 object ActionType {
 
-    const val OPEN_URL = "OPEN_URL"
+    const val CLICK_EVENT = "CLICK_EVENT"
 
     const val LONG_CLICK = "LONG_CLICK"
 

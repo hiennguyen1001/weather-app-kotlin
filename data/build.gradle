@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'io.objectbox'
+
+
+android {
+    compileSdkVersion Versions.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    configurations{
+        ktlint
+    }
+
+}
+
+dependencies {
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$Versions.kotlin_version"
+    api Deps.reactiveX
+    api Deps.networking
+    api Deps.objectBox
+    ktlint Deps.ktlint
+
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "src/**/*.kt"
+    // args "--reporter=checkstyle, output=${buildDir}/ktlint.xml
+}

@@ -2,7 +2,7 @@ package hiennguyen.me.weatherapp.utils
 
 
 import android.support.v7.recyclerview.extensions.DiffCallback
-import hiennguyen.me.weatherapp.data.models.Model
+import hiennguyen.me.weatherapp.common.model.Model
 
 class BaseModelDiffCallback : DiffCallback<Model>() {
 

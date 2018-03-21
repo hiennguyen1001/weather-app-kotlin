@@ -18,6 +18,7 @@ android {
         multiDexEnabled true
 
         buildConfigField "String", "BASE_ENDPOINT", "\"https://api.openweathermap.org/data/2.5/\""
+        resValue "string", "geo_api_key", "\"AIzaSyClwo50v8sJJyqk51jtV9uuEJrZ3P70iYE\""
 
         externalNativeBuild {
             cmake {
@@ -65,15 +66,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$Versions.kotlin_version"
+    implementation project(':data')
+    implementation project(':domain')
     implementation Deps.supportDeps
     implementation Deps.archDeps
     implementation Deps.dagger
-    implementation Deps.reactiveX
-    implementation Deps.networking
     implementation Deps.otherLibs
-    implementation Deps.objectBox
-    ktlint Deps.ktlint
+    implementation Deps.playServiceLibs
+
 
     debugImplementation Deps.onlyDebug
     releaseImplementation Deps.onlyRelease
@@ -82,13 +82,5 @@ dependencies {
 
     testImplementation Deps.unitTest
     androidTestImplementation Deps.androidTest
-}
-
-task ktlint(type: JavaExec, group: "verification") {
-    description = "Check Kotlin code style."
-    classpath = configurations.ktlint
-    main = "com.github.shyiko.ktlint.Main"
-    args "src/**/*.kt"
-    // args "--reporter=checkstyle, output=${buildDir}/ktlint.xml
 }
 

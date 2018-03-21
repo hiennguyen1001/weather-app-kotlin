@@ -1,4 +1,4 @@
-package hiennguyen.me.weatherapp.data.models
+package hiennguyen.me.weatherapp.common.model
 
 interface Model {
 

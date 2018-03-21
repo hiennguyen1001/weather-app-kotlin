@@ -1,0 +1,131 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5912818038371926639",
+      "lastPropertyId": "9:4972892625342826491",
+      "name": "ForeCast",
+      "properties": [
+        {
+          "id": "1:6079245422658248609",
+          "name": "id"
+        },
+        {
+          "id": "2:7714165838458275169",
+          "name": "dt"
+        },
+        {
+          "id": "3:2975780712841992074",
+          "name": "pressure"
+        },
+        {
+          "id": "4:3819317059849771720",
+          "name": "humidity"
+        },
+        {
+          "id": "5:1705253455064900725",
+          "name": "speed"
+        },
+        {
+          "id": "6:3117596638159762479",
+          "name": "deg"
+        },
+        {
+          "id": "7:4426997868855910738",
+          "name": "clouds"
+        },
+        {
+          "id": "8:8290001309652407323",
+          "name": "snow"
+        },
+        {
+          "id": "9:4972892625342826491",
+          "name": "rain"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:5456270002700534199",
+          "name": "temp"
+        },
+        {
+          "id": "2:1400831781775523041",
+          "name": "weather"
+        }
+      ]
+    },
+    {
+      "id": "2:3563347904681452824",
+      "lastPropertyId": "7:694349520750141045",
+      "name": "Temp",
+      "properties": [
+        {
+          "id": "1:8865102709640178362",
+          "name": "id"
+        },
+        {
+          "id": "2:1744981822813377714",
+          "name": "day"
+        },
+        {
+          "id": "3:9166557482315093838",
+          "name": "min"
+        },
+        {
+          "id": "4:2352374002657953146",
+          "name": "max"
+        },
+        {
+          "id": "5:6558261142449578401",
+          "name": "night"
+        },
+        {
+          "id": "6:1916510426113540367",
+          "name": "eve"
+        },
+        {
+          "id": "7:694349520750141045",
+          "name": "morn"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:7767306929631325663",
+      "lastPropertyId": "4:503930804440095603",
+      "name": "Weather",
+      "properties": [
+        {
+          "id": "1:5563011508584804958",
+          "name": "id"
+        },
+        {
+          "id": "2:3146989297713243398",
+          "name": "main"
+        },
+        {
+          "id": "3:1045019600172725737",
+          "name": "description"
+        },
+        {
+          "id": "4:503930804440095603",
+          "name": "icon"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:7767306929631325663",
+  "lastIndexId": "0:0",
+  "lastRelationId": "2:1400831781775523041",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
