@@ -13,9 +13,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     @Inject
     protected lateinit var mBoxStore: BoxStore
 
-    protected val mDisposable: CompositeDisposable = CompositeDisposable()
-
-    private val mIsLoading = ObservableBoolean(false)
+    protected val mIsLoading = ObservableBoolean(false)
 
     fun getIsLoading(): ObservableBoolean {
         return mIsLoading

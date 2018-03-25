@@ -9,7 +9,7 @@
 
         <variable
             name="city"
-            type="hiennguyen.me.weatherapp.common.model.SearchCity" />
+            type="hiennguyen.me.weatherapp.data.models.local.SearchCity" />
 
         <variable
             name="actionHandler"

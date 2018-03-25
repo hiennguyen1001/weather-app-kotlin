@@ -70,10 +70,7 @@ dependencies {
     implementation project(':domain')
     implementation Deps.supportDeps
     implementation Deps.archDeps
-    implementation Deps.dagger
     implementation Deps.otherLibs
-    implementation Deps.playServiceLibs
-
 
     debugImplementation Deps.onlyDebug
     releaseImplementation Deps.onlyRelease

@@ -39,6 +39,9 @@ dependencies {
     api Deps.networking
     api Deps.objectBox
     ktlint Deps.ktlint
+    api Deps.dagger
+
+
 
 }
 

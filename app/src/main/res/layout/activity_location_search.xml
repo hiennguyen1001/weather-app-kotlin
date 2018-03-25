@@ -8,7 +8,7 @@
 
         <variable
             name="searchViewModel"
-            type="hiennguyen.me.weatherapp.presentation.search.viewmodels.SearchViewModels" />
+            type="hiennguyen.me.weatherapp.presentation.search.viewmodels.SearchViewModel" />
 
     </data>
 

@@ -13,6 +13,7 @@ import Versions.playServicesVersion
 import Versions.retrofit
 import Versions.rxAndroid
 import Versions.rxJava
+import Versions.rxKotlin
 import Versions.stetho
 import Versions.support
 import Versions.testRunner
@@ -35,7 +36,8 @@ object Versions {
     val timber = "4.6.0"
     val gson = "2.8.2"
     val glide = "4.5.0"
-    val rxJava = "2.1.8"
+    val rxJava = "2.1.11"
+    val rxKotlin = "2.2.0"
     val rxAndroid = "2.0.1"
     val leakCanary = "1.5.4"
     val objectboxVersion = "1.4.4"
@@ -53,6 +55,7 @@ object Deps {
     val supportDeps = arrayOf("com.android.support:appcompat-v7:$support"
             , "com.android.support.constraint:constraint-layout:$constraint"
             , "com.android.support:design:$support"
+            , "com.android.support:recyclerview-v7:$support"
             , "com.android.support:multidex:$multiDex"
     )
 
@@ -76,8 +79,9 @@ object Deps {
             , "com.google.code.gson:gson:$gson")
 
     val reactiveX = arrayOf(
-            "io.reactivex.rxjava2:rxandroid:$rxAndroid",
-            "io.reactivex.rxjava2:rxjava:$rxJava")
+            "io.reactivex.rxjava2:rxandroid:$rxAndroid"
+            , "io.reactivex.rxjava2:rxjava:$rxJava"
+            , "io.reactivex.rxjava2:rxkotlin:$rxKotlin")
 
     val objectBox = arrayOf("io.objectbox:objectbox-android:$objectboxVersion"
             , "io.objectbox:objectbox-kotlin:$objectboxVersion")
@@ -85,7 +89,7 @@ object Deps {
     val glideLibs = "com.github.bumptech.glide:glide:$glide"
     val glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$glide"
     val timberLib = "com.jakewharton.timber:timber:$timber"
-    val bindingList = "hiennguyen.me.bindingadapterdelegate:bindingadapterdelegate:0.0.1"
+    val bindingList = "hiennguyen.me.bindingadapterdelegate:bindingadapterdelegate:0.1.0"
     val circleimage = "de.hdodenhof:circleimageview:2.2.0"
     val ktlint = "com.github.shyiko:ktlint:0.15.0"
 
@@ -111,4 +115,5 @@ object Deps {
     val otherLibs = arrayOf(glideLibs, glideOkhttp, timberLib, bindingList, circleimage)
     val placeLib = "com.google.android.gms:play-services-places:$playServicesVersion"
     val playServiceLibs = arrayOf(placeLib)
+    val javaInject = "javax.inject:javax.inject:1"
 }
