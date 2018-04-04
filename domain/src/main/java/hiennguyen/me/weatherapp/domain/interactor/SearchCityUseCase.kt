@@ -19,7 +19,7 @@ class SearchCityUseCase @Inject constructor(private val searchCityDisplayMapper:
     override fun buildUseCaseSingle(params: Task<AutocompletePredictionBufferResponse>?): Single<List<SearchCity>> {
         return Single.fromCallable {
             params?.let {
-                Tasks.await(it, 60, TimeUnit.SECONDS)
+                Tasks.await(it, 30, TimeUnit.SECONDS)
                 DataBufferUtils
                         .freezeAndClose<AutocompletePrediction, AutocompletePrediction>(params.result) as List<AutocompletePrediction>
             } ?: emptyList()

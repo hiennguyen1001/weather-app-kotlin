@@ -7,32 +7,48 @@ import com.google.android.gms.location.places.AutocompleteFilter.TYPE_FILTER_CIT
 import com.google.android.gms.location.places.GeoDataClient
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.jakewharton.rxrelay2.PublishRelay
 import hiennguyen.me.weatherapp.common.base.viewmodels.BaseViewModel
 import hiennguyen.me.weatherapp.data.models.local.SearchCity
 import hiennguyen.me.weatherapp.domain.interactor.SearchCityUseCase
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import java.util.*
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
 class SearchViewModel @Inject constructor(application: Application, private val geoDataClient: GeoDataClient,
                                           private val searchCityUseCase: SearchCityUseCase) : BaseViewModel(application) {
 
-    val cityListLiveData = MutableLiveData<List<SearchCity>>()
+    var cityListLiveData = MutableLiveData<List<SearchCity>>()
+    private val searchPublishSubject = PublishRelay.create<String>()
+
+    init {
+        initSearchPublishSubject()
+    }
 
     fun search(key: String) {
-        mIsLoading.set(true)
-        val results = geoDataClient.getAutocompletePredictions(key, BOUNDS_GREATER_SYDNEY, filter)
-        searchCityUseCase.singleSubscribeWith(onSuccess = {
-            cityListLiveData.value = it
-            mIsLoading.set(false)
-        }, onError = {
-            mIsLoading.set(false)
-        }, params = results)
+        searchPublishSubject.accept(key)
     }
+
+    private fun initSearchPublishSubject() {
+        searchPublishSubject
+                .debounce(300, TimeUnit.MILLISECONDS)
+                .distinctUntilChanged()
+                .subscribeOn(Schedulers.io())
+                .subscribe({ result ->
+                    Timber.d(result)
+                    mIsLoading.set(true)
+                    val results = geoDataClient.getAutocompletePredictions(result, BOUNDS_GREATER_SYDNEY, filter)
+                    searchCityUseCase.singleSubscribeWith(onSuccess = {
+                        cityListLiveData.value = it
+                        mIsLoading.set(false)
+                    }, onError = {
+                        mIsLoading.set(false)
+                    }, params = results)
+                }, { t: Throwable? -> Timber.w(t, "Failed to get search results") })
+    }
+
 
     override fun onCleared() {
         searchCityUseCase.dispose()

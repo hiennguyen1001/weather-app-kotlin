@@ -20,7 +20,7 @@ import Versions.testRunner
 import Versions.timber
 
 object Versions {
-    val kotlin_version = "1.2.10"
+    val kotlin_version = "1.2.31"
     val buildToolsVersion = "27.0.3"
     val compileSdkVersion = 26
     val minSdkVersion = 16
@@ -81,7 +81,8 @@ object Deps {
     val reactiveX = arrayOf(
             "io.reactivex.rxjava2:rxandroid:$rxAndroid"
             , "io.reactivex.rxjava2:rxjava:$rxJava"
-            , "io.reactivex.rxjava2:rxkotlin:$rxKotlin")
+            , "io.reactivex.rxjava2:rxkotlin:$rxKotlin"
+            , "com.jakewharton.rxrelay2:rxrelay:2.0.0")
 
     val objectBox = arrayOf("io.objectbox:objectbox-android:$objectboxVersion"
             , "io.objectbox:objectbox-kotlin:$objectboxVersion")
@@ -104,7 +105,6 @@ object Deps {
             , "com.google.dagger:dagger-compiler:$dagger2"
             , "com.google.dagger:dagger-android-processor:$dagger2"
             , "com.github.bumptech.glide:compiler:$glide"
-            , "com.android.databinding:compiler:3.0.1"
             , "io.objectbox:objectbox-processor:$objectboxVersion")
 
     val unitTest = arrayOf("junit:junit:${Versions.junit}")

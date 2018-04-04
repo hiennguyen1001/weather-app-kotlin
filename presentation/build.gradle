@@ -7,6 +7,7 @@ apply plugin: 'io.objectbox'
 android {
     compileSdkVersion Versions.compileSdkVersion
     buildToolsVersion Versions.buildToolsVersion
+
     defaultConfig {
         applicationId Configs.appId
         minSdkVersion Versions.minSdkVersion
