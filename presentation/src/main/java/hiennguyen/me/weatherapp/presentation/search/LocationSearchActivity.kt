@@ -61,7 +61,7 @@ class LocationSearchActivity : BaseActivity<ActivityLocationSearchBinding, Searc
             return@setOnQueryTextListener true
         })
 
-        viewModel.cityListLiveData.observe(this, Observer {
+        viewModel.cityListLiveData.observe(this , Observer {
             adapter.items = it
         })
     }

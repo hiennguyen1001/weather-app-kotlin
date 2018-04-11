@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.region_nav_menu.*
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
 
-
     override fun layoutId(): Int {
         return R.layout.activity_home
     }
@@ -22,7 +21,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().replace(R.id.fl_content, HomeFragment()).commit()
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_content, HomeFragment()).commit()
         }
         binding.homeViewModel = viewModel
         setup()

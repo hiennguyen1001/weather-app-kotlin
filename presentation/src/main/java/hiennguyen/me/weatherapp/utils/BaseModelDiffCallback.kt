@@ -1,10 +1,10 @@
 package hiennguyen.me.weatherapp.utils
 
 
-import android.support.v7.recyclerview.extensions.DiffCallback
+import android.support.v7.util.DiffUtil
 import hiennguyen.me.weatherapp.data.models.local.Model
 
-class BaseModelDiffCallback : DiffCallback<Model>() {
+class BaseModelDiffCallback : DiffUtil.ItemCallback<Model>() {
 
     override fun areItemsTheSame(oldItem: Model, newItem: Model): Boolean {
         return false

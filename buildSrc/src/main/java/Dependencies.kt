@@ -22,13 +22,13 @@ import Versions.timber
 object Versions {
     val kotlin_version = "1.2.31"
     val buildToolsVersion = "27.0.3"
-    val compileSdkVersion = 26
+    val compileSdkVersion = 27
     val minSdkVersion = 16
-    val targetSdkVersion = 26
-    val support = "27.0.2"
+    val targetSdkVersion = 27
+    val support = "27.1.1"
     val constraint = "1.0.2"
-    val architecture = "1.0.0"
-    val archPagging = "1.0.0-alpha4-1"
+    val architecture = "1.1.0"
+    val archPagging = "1.0.0-beta1"
     val dagger2 = "2.12"
     val okHttp = "3.9.0"
     val retrofit = "2.3.0"
@@ -90,9 +90,10 @@ object Deps {
     val glideLibs = "com.github.bumptech.glide:glide:$glide"
     val glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$glide"
     val timberLib = "com.jakewharton.timber:timber:$timber"
-    val bindingList = "hiennguyen.me.bindingadapterdelegate:bindingadapterdelegate:0.1.0"
+    val bindingList = "hiennguyen.me.bindingadapterdelegate:bindingadapterdelegate:0.1.1"
     val circleimage = "de.hdodenhof:circleimageview:2.2.0"
     val ktlint = "com.github.shyiko:ktlint:0.15.0"
+    val indicatore = "com.romandanylyk:pageindicatorview:1.0.0"
 
     val onlyDebug = arrayOf(
             "com.squareup.leakcanary:leakcanary-android:$leakCanary")
@@ -112,7 +113,7 @@ object Deps {
     val androidTest = arrayOf("com.android.support.test:runner:$testRunner"
             , "com.android.support.test.espresso:espresso-core:$espresso")
 
-    val otherLibs = arrayOf(glideLibs, glideOkhttp, timberLib, bindingList, circleimage)
+    val otherLibs = arrayOf(glideLibs, glideOkhttp, timberLib, bindingList, circleimage, indicatore)
     val placeLib = "com.google.android.gms:play-services-places:$playServicesVersion"
     val playServiceLibs = arrayOf(placeLib)
     val javaInject = "javax.inject:javax.inject:1"

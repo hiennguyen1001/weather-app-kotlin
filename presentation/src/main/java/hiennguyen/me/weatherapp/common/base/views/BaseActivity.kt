@@ -5,33 +5,46 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import dagger.android.support.DaggerAppCompatActivity
+import android.support.v7.app.AppCompatActivity
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasFragmentInjector
+import dagger.android.support.HasSupportFragmentInjector
 import hiennguyen.me.weatherapp.common.base.viewmodels.BaseViewModel
 import hiennguyen.me.weatherapp.presentation.navigators.Navigator
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
 
-abstract class BaseActivity<V : ViewDataBinding, M : BaseViewModel> : DaggerAppCompatActivity() {
+abstract class BaseActivity<V : ViewDataBinding, M : BaseViewModel> : AppCompatActivity(), HasFragmentInjector, HasSupportFragmentInjector {
 
     protected lateinit var binding: V
     protected lateinit var viewModel: M
 
-    @Inject
-    protected lateinit var navigator: Navigator
+    @Inject lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject lateinit var frameworkFragmentInjector: DispatchingAndroidInjector<android.app.Fragment>
 
-    @Inject
-    protected lateinit var mFragmentManager: FragmentManager
-
-    @Inject
-    lateinit var mFactory: ViewModelProvider.Factory
+    @Inject protected lateinit var navigator: Navigator
+    @Inject protected lateinit var mFragmentManager: FragmentManager
+    @Inject lateinit var mFactory: ViewModelProvider.Factory
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = bindingView(layoutId())
         viewModel = ViewModelProviders.of(this, mFactory).get(viewModelClass())
+    }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment>? {
+        return supportFragmentInjector
+    }
+
+    override fun fragmentInjector(): AndroidInjector<android.app.Fragment>? {
+        return frameworkFragmentInjector
     }
 
     private fun bindingView(layoutId: Int): V {

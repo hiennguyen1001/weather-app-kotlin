@@ -30,7 +30,12 @@
                     android:id="@+id/layout_toolbar"
                     layout="@layout/layout_toolbar" />
 
-                <include layout="@layout/content_home" />
+                <FrameLayout
+                    android:id="@+id/fl_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    />
 
             </android.support.design.widget.CoordinatorLayout>
 
@@ -50,7 +55,6 @@
                 <include
                     android:id="@+id/regionNavigation"
                     layout="@layout/region_nav_menu" />
-
 
             </android.support.design.widget.NavigationView>
 
