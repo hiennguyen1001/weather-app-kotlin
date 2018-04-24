@@ -11,8 +11,8 @@ import com.jakewharton.rxrelay2.PublishRelay
 import hiennguyen.me.weatherapp.common.base.viewmodels.BaseViewModel
 import hiennguyen.me.weatherapp.data.models.local.SearchCity
 import hiennguyen.me.weatherapp.domain.interactor.SearchCityUseCase
+import hiennguyen.me.weatherapp.utils.LogWraper
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -28,6 +28,7 @@ class SearchViewModel @Inject constructor(application: Application, private val 
     }
 
     fun search(key: String) {
+        LogWraper.d { key }
         searchPublishSubject.accept(key)
     }
 
@@ -37,7 +38,6 @@ class SearchViewModel @Inject constructor(application: Application, private val 
                 .distinctUntilChanged()
                 .subscribeOn(Schedulers.io())
                 .subscribe({ result ->
-                    Timber.d(result)
                     mIsLoading.set(true)
                     val results = geoDataClient.getAutocompletePredictions(result, BOUNDS_GREATER_SYDNEY, filter)
                     searchCityUseCase.singleSubscribeWith(onSuccess = {
@@ -46,7 +46,9 @@ class SearchViewModel @Inject constructor(application: Application, private val 
                     }, onError = {
                         mIsLoading.set(false)
                     }, params = results)
-                }, { t: Throwable? -> Timber.w(t, "Failed to get search results") })
+                }, { t: Throwable? -> t?.let {
+                    LogWraper.d(message = { "Failed to get search results" }, throwable = t)
+                }})
     }
 
 
