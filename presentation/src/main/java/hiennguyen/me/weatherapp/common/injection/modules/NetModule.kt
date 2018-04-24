@@ -8,11 +8,11 @@ import dagger.Provides
 import hiennguyen.me.weatherapp.BuildConfig
 import hiennguyen.me.weatherapp.data.network.NetworkingHelper
 import hiennguyen.me.weatherapp.utils.Config
+import hiennguyen.me.weatherapp.utils.LogWraper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import timber.log.Timber
 
 
 @Module
@@ -24,8 +24,7 @@ class NetModule {
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor { message ->
-            Timber.tag(Config.API_LOG)
-            Timber.d(message)
+            LogWraper.i(Config.API_LOG) { message }
         }.setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 

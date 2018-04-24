@@ -17,7 +17,6 @@ import Versions.rxKotlin
 import Versions.stetho
 import Versions.support
 import Versions.testRunner
-import Versions.timber
 
 object Versions {
     val kotlin_version = "1.2.31"
@@ -33,7 +32,6 @@ object Versions {
     val okHttp = "3.9.0"
     val retrofit = "2.3.0"
     val stetho = "1.5.0"
-    val timber = "4.6.0"
     val gson = "2.8.2"
     val glide = "4.5.0"
     val rxJava = "2.1.11"
@@ -89,7 +87,6 @@ object Deps {
 
     val glideLibs = "com.github.bumptech.glide:glide:$glide"
     val glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$glide"
-    val timberLib = "com.jakewharton.timber:timber:$timber"
     val bindingList = "hiennguyen.me.bindingadapterdelegate:bindingadapterdelegate:0.1.1"
     val circleimage = "de.hdodenhof:circleimageview:2.2.0"
     val ktlint = "com.github.shyiko:ktlint:0.15.0"
@@ -113,7 +110,7 @@ object Deps {
     val androidTest = arrayOf("com.android.support.test:runner:$testRunner"
             , "com.android.support.test.espresso:espresso-core:$espresso")
 
-    val otherLibs = arrayOf(glideLibs, glideOkhttp, timberLib, bindingList, circleimage, indicatore)
+    val otherLibs = arrayOf(glideLibs, glideOkhttp, bindingList, circleimage, indicatore)
     val placeLib = "com.google.android.gms:play-services-places:$playServicesVersion"
     val playServiceLibs = arrayOf(placeLib)
     val javaInject = "javax.inject:javax.inject:1"

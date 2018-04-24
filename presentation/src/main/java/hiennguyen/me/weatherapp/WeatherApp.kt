@@ -11,7 +11,6 @@ import dagger.android.HasActivityInjector
 import hiennguyen.me.weatherapp.common.injection.components.DaggerAppComponent
 import io.objectbox.BoxStore
 import io.objectbox.android.AndroidObjectBrowser
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -34,7 +33,6 @@ class WeatherApp : MultiDexApplication(), HasActivityInjector {
                 .build()
                 .inject(this)
         if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
             Stetho.initializeWithDefaults(this)
             LeakCanary.install(this)
             AndroidObjectBrowser(boxStore).start(this)
