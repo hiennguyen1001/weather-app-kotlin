@@ -9,6 +9,16 @@ android {
     buildToolsVersion Versions.buildToolsVersion
 
     defaultConfig {
+
+        signingConfigs {
+            weatherApp {
+                storeFile file("../keystores/weatherApp")
+                storePassword 'weather_app_2018'
+                keyAlias 'WeatherApp'
+                keyPassword 'weather_app_2018'
+            }
+        }
+
         applicationId Configs.appId
         minSdkVersion Versions.minSdkVersion
         targetSdkVersion Versions.targetSdkVersion
@@ -38,6 +48,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.weatherApp
         }
     }
 
