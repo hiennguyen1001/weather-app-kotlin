@@ -29,5 +29,4 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-apply from: 'code_quality_tools/quality.gradle'
 
