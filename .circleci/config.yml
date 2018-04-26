@@ -80,6 +80,9 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
       - run:
+          name: Disable Gradle Daemon
+          command: mkdir -p ~/.gradle && echo "org.gradle.daemon=false" >> ~/.gradle/gradle.properties
+      - run:
           name: Initial build
           command: ./gradlew clean assembleRelease --no-daemon --stacktrace
       - store_artifacts:
