@@ -3,7 +3,6 @@ jobs:
   accept_library_licenses:
             docker:
               - image: circleci/android:api-25-alpha
-              - image: circleci/openjdk:8-jdk
               - image: bitriseio/android-ndk:v2018_04_21-09_12-b976
             working_directory: ~/weather-app-kotlin
             environment:
