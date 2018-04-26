@@ -10,7 +10,7 @@ jobs:
             steps:
               - checkout
               - run: cp -r licenses/. $ANDROID_HOME/licenses
-   running_code_quality_tools:
+  running_code_quality_tools:
       docker:
         - image: circleci/android:api-25-alpha
       environment:
