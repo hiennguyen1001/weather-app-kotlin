@@ -41,8 +41,7 @@ dependencies {
     ktlint Deps.ktlint
     api Deps.dagger
 
-
-
+    testImplementation Deps.unitTest
 }
 
 task ktlint(type: JavaExec, group: "verification") {
