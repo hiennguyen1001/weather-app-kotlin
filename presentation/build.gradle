@@ -52,10 +52,6 @@ android {
         }
     }
 
-    configurations{
-        ktlint
-    }
-
     androidExtensions {
         experimental = true
     }

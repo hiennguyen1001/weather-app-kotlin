@@ -10,6 +10,36 @@ jobs:
             steps:
               - checkout
               - run: cp -r licenses/. $ANDROID_HOME/licenses
+   running_code_quality_tools:
+      docker:
+        - image: circleci/android:api-25-alpha
+      environment:
+        JVM_OPTS: -Xmx4G
+      steps:
+        - checkout
+        - restore_cache:
+            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+        - run: echo "Verify from this branch ${CIRCLE_BRANCH}"
+        - run:
+            name: Chmod permissions
+            command: sudo chmod +x ./gradlew
+        - run:
+            name: Download Dependencies
+            command: ./gradlew androidDependencies
+        - save_cache:
+            paths:
+              - ~/.gradle
+            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+        - run:
+            name: Run code quality tools
+            command: ./gradlew ktlintCheck
+        - store_artifacts:
+            path: presentation/build/reports/
+            destination: code_quality_results/
+        - run: chmod +x code_quality_tools/run-gradle-android.sh
+        - run:
+            name: Run Saddler to commit to pull request
+            command: code_quality_tools/run-gradle-android.sh
   running_test:
         docker:
           - image: circleci/android:api-25-alpha
@@ -85,18 +115,26 @@ jobs:
           command: mkdir -p ~/.gradle && echo "org.gradle.daemon=false" >> ~/.gradle/gradle.properties
       - run:
           name: Initial build
-          command: ./gradlew clean assembleRelease --no-daemon --stacktrace
+          command: ./gradlew clean assembleDebug --no-daemon --stacktrace
       - store_artifacts:
           path: presentation/build/outputs/apk/
           destination: apks/
 workflows:
   version: 2
-  test_and_build:
+  check_code_quality:
     jobs:
       - accept_library_licenses
-      - running_test:
+      - running_code_quality_tools:
           requires:
             - accept_library_licenses
-      - build_release:
-          requires:
-            - running_test
+#workflows:
+#  version: 2
+#  test_and_build:
+#    jobs:
+#      - accept_library_licenses
+#      - running_test:
+#          requires:
+#            - accept_library_licenses
+#      - build_release:
+#          requires:
+#            - running_test

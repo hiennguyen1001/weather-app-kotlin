@@ -1,0 +1,25 @@
+apply plugin: 'checkstyle'
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+task checkstyle(type: Checkstyle) {
+    description 'Check code standard'
+    group 'verification'
+
+    configFile file('./code_quality_tools/checkstyle.xml')
+    source 'src'
+    include '**/*.java'
+    include '**/*.kt'
+    exclude '**/gen/**'
+
+    classpath = files()
+    ignoreFailures = false
+}
+
+ktlint {
+    debug = true
+    verbose = true
+    android = true
+    outputToConsole = true
+    reporters = ["CHECKSTYLE"]
+    ignoreFailures = true
+}

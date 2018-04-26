@@ -26,11 +26,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    configurations{
-        ktlint
-    }
-
 }
 
 dependencies {
@@ -38,15 +33,6 @@ dependencies {
     api Deps.reactiveX
     api Deps.networking
     api Deps.objectBox
-    ktlint Deps.ktlint
     api Deps.javaInject
     testImplementation Deps.unitTest
-}
-
-task ktlint(type: JavaExec, group: "verification") {
-    description = "Check Kotlin code style."
-    classpath = configurations.ktlint
-    main = "com.github.shyiko.ktlint.Main"
-    args "src/**/*.kt"
-    // args "--reporter=checkstyle, output=${buildDir}/ktlint.xml
 }
