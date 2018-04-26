@@ -12,6 +12,6 @@ else
     REPORTER=Saddler::Reporter::Github::PullRequestReviewComment
 fi
 
-cat presentation/build/reports/ktlint/ktlint-productionDebug.xml \
+cat presentation/build/reports/ktlint/ktlint-debug.xml \
     | checkstyle_filter-git diff origin/master \
     | saddler report --require saddler/reporter/github --reporter $REPORTER
