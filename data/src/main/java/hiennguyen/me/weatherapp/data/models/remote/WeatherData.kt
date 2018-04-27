@@ -15,7 +15,16 @@ class Temp(@Id var id: Long, var day: Double?, var min: Double?, var max: Double
 class Weather(@Id var id: Long?, var main: String?, var description: String?, var icon: String?)
 
 @Entity
-data class ForeCast(@Id var id: Long, var dt: Int?, var temp: ToMany<Temp>, var pressure: Double?, var humidity: Int?,
-                    var weather: List<Weather>, var speed: Double?, var deg: Double?, var clouds: Int?, var snow: Double?, var rain: Double?)
+data class
+ForeCast(@Id var id: Long,
+         var dt: Int?,
+         var temp: ToMany<Temp>,
+         var pressure: Double?,
+         var humidity: Int?,
+         var weather: List<Weather>,
+         var speed: Double?, var deg: Double?,
+         var clouds: Int?,
+         var snow: Double?,
+         var rain: Double?)
 
 data class ForeCastResponse(var city: City?, var cod: String?, var message: Double?, var cnt: Double?, var list: List<ForeCast>)
