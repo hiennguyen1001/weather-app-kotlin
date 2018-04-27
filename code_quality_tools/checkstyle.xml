@@ -8,5 +8,8 @@
         <module name="ParameterNumber">
             <property name="max" value="6" />
         </module>
+        <module name="LineLength">
+            <property name="max" value="140"/>
+        </module>
     </module>
 </module>
