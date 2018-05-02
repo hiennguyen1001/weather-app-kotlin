@@ -4,11 +4,6 @@ if [ $? -ne 0 ]; then
     echo 'Failed to install gems.'
     exit 1
 fi
-
-if [ -z "${CI_PULL_REQUEST}" ]; then
-    # when not pull request
-    # REPORTER=Saddler::Reporter::Github::CommitReviewComment
-else
     REPORTER=Saddler::Reporter::Github::PullRequestReviewComment
 fi
 
