@@ -4,8 +4,8 @@ if [ $? -ne 0 ]; then
     echo 'Failed to install gems.'
     exit 1
 fi
-    REPORTER=Saddler::Reporter::Github::PullRequestReviewComment
-fi
+
+REPORTER=Saddler::Reporter::Github::PullRequestReviewComment
 
 cat presentation/build/reports/ktlint/ktlint-release.xml \
     | checkstyle_filter-git diff origin/master \
