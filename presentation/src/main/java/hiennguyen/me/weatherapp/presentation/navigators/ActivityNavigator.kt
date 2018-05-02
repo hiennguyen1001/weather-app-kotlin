@@ -16,6 +16,8 @@ import javax.inject.Inject
 
 
 
+
+
 open class ActivityNavigator @Inject
 constructor(private val activity: FragmentActivity?) : Navigator {
 
@@ -110,6 +112,10 @@ constructor(private val activity: FragmentActivity?) : Navigator {
             ft?.commitNow()
         }
     }
+
+
+
+
 
     private fun startActivityInternal(activityClass: Class<out Activity>, setArgsAction: ((intent: Intent) -> Unit)? = null,
                                       requestCode: Int? = null) {
