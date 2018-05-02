@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
 import android.os.Parcelable
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
@@ -12,11 +11,6 @@ import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 
 import javax.inject.Inject
-
-
-
-
-
 
 open class ActivityNavigator @Inject
 constructor(private val activity: FragmentActivity?) : Navigator {
@@ -112,10 +106,6 @@ constructor(private val activity: FragmentActivity?) : Navigator {
             ft?.commitNow()
         }
     }
-
-
-
-
 
     private fun startActivityInternal(activityClass: Class<out Activity>, setArgsAction: ((intent: Intent) -> Unit)? = null,
                                       requestCode: Int? = null) {

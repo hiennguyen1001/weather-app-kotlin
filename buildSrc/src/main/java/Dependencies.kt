@@ -19,7 +19,7 @@ import Versions.support
 import Versions.testRunner
 
 object Versions {
-    val kotlin_version = "1.2.31"
+    val kotlin_version = "1.2.41"
     val buildToolsVersion = "27.0.3"
     val compileSdkVersion = 27
     val minSdkVersion = 16

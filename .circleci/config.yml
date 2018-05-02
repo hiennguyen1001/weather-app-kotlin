@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  accept_library_licenses:
+  prepair_build:
             docker:
               - image: circleci/android:api-25-alpha
               - image: bitriseio/android-ndk:v2018_04_21-09_12-b976
@@ -10,6 +10,21 @@ jobs:
             steps:
               - checkout
               - run: cp -r licenses/. $ANDROID_HOME/licenses
+              - restore_cache:
+                  key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+              - run:
+                  name: Chmod permissions
+                  command: sudo chmod +x ./gradlew
+              - run:
+                  name: Install Android NDK
+                  command: source scripts/circleCiEnvironmentSetup.sh && getAndroidNDK
+              - run:
+                  name: Download Dependencies
+                  command: ./gradlew androidDependencies
+              - save_cache:
+                  paths:
+                    - ~/.gradle
+                  key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
   running_code_quality_tools:
       docker:
         - image: circleci/android:api-25-alpha
@@ -17,22 +32,7 @@ jobs:
         JVM_OPTS: -Xmx4G
       steps:
         - checkout
-        - restore_cache:
-            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
         - run: echo "Verify from this branch ${CIRCLE_BRANCH}"
-        - run:
-            name: Chmod permissions
-            command: sudo chmod +x ./gradlew
-        - run:
-            name: Install Android NDK
-            command: source scripts/circleCiEnvironmentSetup.sh && getAndroidNDK
-        - run:
-            name: Download Dependencies
-            command: ./gradlew androidDependencies
-        - save_cache:
-            paths:
-              - ~/.gradle
-            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
         - run:
             name: Run code quality tools
             command: ./gradlew ktlintCheck
@@ -50,21 +50,6 @@ jobs:
           JVM_OPTS: -Xmx4G
         steps:
           - checkout
-          - restore_cache:
-              key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
-          - run:
-             name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-             command: sudo chmod +x ./gradlew
-          - run:
-             name: Install Android NDK
-             command: source scripts/circleCiEnvironmentSetup.sh && getAndroidNDK
-          - run:
-              name: Download Dependencies
-              command: ./gradlew androidDependencies
-          - save_cache:
-              paths:
-                - ~/.gradle
-              key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
           - run:
               name: Run Presentation Module Unit Tests
               command: ./gradlew :presentation:testDebugUnitTest
@@ -91,53 +76,14 @@ jobs:
               command: ./gradlew lint test
           - store_test_results:
                     path: presentation/build/test-results
-  build_release:
-    docker:
-      - image: circleci/android:api-25-alpha
-    environment:
-      JVM_OPTS: -Xmx4G
-    steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
-      - run:
-         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-         command: sudo chmod +x ./gradlew
-      - run:
-          name: Install Android NDK
-          command: source scripts/circleCiEnvironmentSetup.sh && getAndroidNDK
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
-      - run:
-          name: Disable Gradle Daemon
-          command: mkdir -p ~/.gradle && echo "org.gradle.daemon=false" >> ~/.gradle/gradle.properties
-      - run:
-          name: Initial build
-          command: ./gradlew clean assembleDebug --no-daemon --stacktrace
-      - store_artifacts:
-          path: presentation/build/outputs/apk/
-          destination: apks/
 workflows:
   version: 2
   check_code_quality:
     jobs:
-      - accept_library_licenses
+      - prepair_build
       - running_code_quality_tools:
           requires:
-            - accept_library_licenses
-#workflows:
-#  version: 2
-#  test_and_build:
-#    jobs:
-#      - accept_library_licenses
-#      - running_test:
-#          requires:
-#            - accept_library_licenses
-#      - build_release:
-#          requires:
-#            - running_test
+            - prepair_build
+      - running_test:
+          requires:
+            - prepair_build
