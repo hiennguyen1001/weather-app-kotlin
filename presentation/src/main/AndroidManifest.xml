@@ -15,12 +15,16 @@
         <activity android:name="hiennguyen.me.weatherapp.presentation.home.views.HomeActivity">
 
         </activity>
-        <activity android:name=".presentation.search.LocationSearchActivity" >
+
+        <activity android:name=".presentation.landing.views.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".presentation.search.LocationSearchActivity" />
+        <activity android:name=".presentation.landing.views.LandingActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
