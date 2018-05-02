@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  prepair_build:
+  accept_library_licenses:
             docker:
               - image: circleci/android:api-25-alpha
               - image: bitriseio/android-ndk:v2018_04_21-09_12-b976
@@ -10,21 +10,6 @@ jobs:
             steps:
               - checkout
               - run: cp -r licenses/. $ANDROID_HOME/licenses
-              - restore_cache:
-                  key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
-              - run:
-                  name: Chmod permissions
-                  command: sudo chmod +x ./gradlew
-              - run:
-                  name: Install Android NDK
-                  command: source scripts/circleCiEnvironmentSetup.sh && getAndroidNDK
-              - run:
-                  name: Download Dependencies
-                  command: ./gradlew androidDependencies
-              - save_cache:
-                  paths:
-                    - ~/.gradle
-                  key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
   running_code_quality_tools:
       docker:
         - image: circleci/android:api-25-alpha
@@ -32,7 +17,19 @@ jobs:
         JVM_OPTS: -Xmx4G
       steps:
         - checkout
+        - restore_cache:
+            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
         - run: echo "Verify from this branch ${CIRCLE_BRANCH}"
+        - run:
+            name: Chmod permissions
+            command: sudo chmod +x ./gradlew
+        - run:
+            name: Download Dependencies
+            command: ./gradlew androidDependencies
+        - save_cache:
+            paths:
+              - ~/.gradle
+            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
         - run:
             name: Run code quality tools
             command: ./gradlew ktlintCheck
@@ -50,6 +47,21 @@ jobs:
           JVM_OPTS: -Xmx4G
         steps:
           - checkout
+          - restore_cache:
+              key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+          - run:
+             name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+             command: sudo chmod +x ./gradlew
+          - run:
+             name: Install Android NDK
+             command: source scripts/circleCiEnvironmentSetup.sh && getAndroidNDK
+          - run:
+              name: Download Dependencies
+              command: ./gradlew androidDependencies
+          - save_cache:
+              paths:
+                - ~/.gradle
+              key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
           - run:
               name: Run Presentation Module Unit Tests
               command: ./gradlew :presentation:testDebugUnitTest
@@ -80,10 +92,10 @@ workflows:
   version: 2
   check_code_quality:
     jobs:
-      - prepair_build
+      - accept_library_licenses
       - running_code_quality_tools:
           requires:
-            - prepair_build
+            - accept_library_licenses
       - running_test:
           requires:
-            - prepair_build
+            - accept_library_licenses
