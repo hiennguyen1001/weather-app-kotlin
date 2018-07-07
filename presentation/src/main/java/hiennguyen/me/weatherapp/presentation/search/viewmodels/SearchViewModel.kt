@@ -11,7 +11,7 @@ import com.jakewharton.rxrelay2.PublishRelay
 import hiennguyen.me.weatherapp.common.base.viewmodels.BaseViewModel
 import hiennguyen.me.weatherapp.data.models.local.SearchCity
 import hiennguyen.me.weatherapp.domain.interactor.SearchCityUseCase
-import hiennguyen.me.weatherapp.utils.LogWraper
+import hiennguyen.me.weatherapp.utils.Logger
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -28,7 +28,7 @@ class SearchViewModel @Inject constructor(application: Application, private val 
     }
 
     fun search(key: String) {
-        LogWraper.d { key }
+        Logger.d(message = key)
         searchPublishSubject.accept(key)
     }
 
@@ -47,7 +47,7 @@ class SearchViewModel @Inject constructor(application: Application, private val 
                         mIsLoading.set(false)
                     }, params = results)
                 }, { t: Throwable? -> t?.let {
-                    LogWraper.d(message = { "Failed to get search results" }, throwable = t)
+                    Logger.d(message = "Failed to get search results", throwable = t)
                 }})
     }
 

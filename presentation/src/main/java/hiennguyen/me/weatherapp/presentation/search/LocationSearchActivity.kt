@@ -5,6 +5,9 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.View
+import android.widget.Toast
+import com.google.android.gms.location.places.GeoDataClient
+import com.google.android.gms.tasks.OnSuccessListener
 import hiennguyen.me.bindingadapterdelegate.ListConfig
 import hiennguyen.me.bindingadapterdelegate.actionhandler.ActionHandler
 import hiennguyen.me.bindingadapterdelegate.actionhandler.action.BaseAction
@@ -22,9 +25,12 @@ import hiennguyen.me.weatherapp.presentation.search.viewmodels.SearchViewModel
 import hiennguyen.me.weatherapp.utils.BaseModelDiffCallback
 import hiennguyen.me.weatherapp.utils.setOnQueryTextListener
 import kotlinx.android.synthetic.main.activity_location_search.*
+import javax.inject.Inject
 
 
 class LocationSearchActivity : BaseActivity<ActivityLocationSearchBinding, SearchViewModel>() {
+
+    @Inject lateinit var mGeoDataClient: GeoDataClient
 
     override fun layoutId(): Int {
         return R.layout.activity_location_search
@@ -41,6 +47,14 @@ class LocationSearchActivity : BaseActivity<ActivityLocationSearchBinding, Searc
                     }
 
                     override fun onFireAction(context: Context, view: View?, actionType: String?, model: SearchCity?) {
+                        if (actionType.equals(ActionType.CLICK_EVENT)) {
+                            model?.placeId?.let {
+                                mGeoDataClient.getPlaceById(it).addOnSuccessListener(this@LocationSearchActivity, {
+                                    val place = it.get(0)
+                                    Toast.makeText(this@LocationSearchActivity, place.address, Toast.LENGTH_LONG).show()
+                                })
+                            }
+                        }
                     }
                 })
                 .build()
@@ -60,7 +74,6 @@ class LocationSearchActivity : BaseActivity<ActivityLocationSearchBinding, Searc
             }
             return@setOnQueryTextListener true
         })
-
         viewModel.cityListLiveData.observe(this , Observer {
             adapter.items = it
         })

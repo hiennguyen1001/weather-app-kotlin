@@ -9,7 +9,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.2.0-beta02'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$Versions.kotlin_version"
         classpath "io.objectbox:objectbox-gradle-plugin:$Versions.objectboxVersion"
         classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:3.3.0"

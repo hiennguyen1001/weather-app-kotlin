@@ -19,7 +19,7 @@ import Versions.support
 import Versions.testRunner
 
 object Versions {
-    val kotlin_version = "1.2.41"
+    val kotlin_version = "1.2.50"
     val buildToolsVersion = "27.0.3"
     val compileSdkVersion = 27
     val minSdkVersion = 16
@@ -28,7 +28,7 @@ object Versions {
     val constraint = "1.0.2"
     val architecture = "1.1.0"
     val archPagging = "1.0.0-beta1"
-    val dagger2 = "2.12"
+    val dagger2 = "2.16"
     val okHttp = "3.9.0"
     val retrofit = "2.3.0"
     val stetho = "1.5.0"
@@ -39,7 +39,7 @@ object Versions {
     val rxAndroid = "2.0.1"
     val leakCanary = "1.5.4"
     val objectboxVersion = "1.4.4"
-    val playServicesVersion = "12.0.0"
+    val playServicesVersion = "15.0.1"
 
 
     val junit = "4.12"

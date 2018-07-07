@@ -3,13 +3,13 @@ package hiennguyen.me.weatherapp.common.base.modules
 import android.content.Context
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
+import com.google.android.gms.location.places.GeoDataClient
 import com.google.android.gms.location.places.Places
 import dagger.Module
 import dagger.Provides
 import hiennguyen.me.weatherapp.common.injection.modules.ViewModelModule
 import hiennguyen.me.weatherapp.common.injection.qualifiers.ActivityContext
 import hiennguyen.me.weatherapp.common.injection.scopes.PerActivity
-import hiennguyen.me.weatherapp.domain.interactor.SearchCityUseCase
 import hiennguyen.me.weatherapp.presentation.navigators.ActivityNavigator
 import hiennguyen.me.weatherapp.presentation.navigators.Navigator
 
@@ -44,6 +44,6 @@ class BaseActivityModule {
 
     @Provides
     @PerActivity
-    fun provideGeoDataClient(activity: FragmentActivity) = Places.getGeoDataClient(activity)
+    fun provideGeoDataClient(activity: FragmentActivity): GeoDataClient = Places.getGeoDataClient(activity)
 
 }

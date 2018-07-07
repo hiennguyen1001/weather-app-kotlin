@@ -8,7 +8,7 @@ import dagger.Provides
 import hiennguyen.me.weatherapp.BuildConfig
 import hiennguyen.me.weatherapp.data.network.NetworkingHelper
 import hiennguyen.me.weatherapp.utils.Config
-import hiennguyen.me.weatherapp.utils.LogWraper
+import hiennguyen.me.weatherapp.utils.Logger
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -24,7 +24,7 @@ class NetModule {
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor { message ->
-            LogWraper.i(Config.API_LOG) { message }
+            Logger.i(Config.API_LOG, message)
         }.setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
