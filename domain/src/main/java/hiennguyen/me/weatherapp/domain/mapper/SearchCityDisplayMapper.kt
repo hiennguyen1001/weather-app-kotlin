@@ -18,7 +18,7 @@ class SearchCityDisplayMapper @Inject constructor() : Function<List<Autocomplete
                 .blockingGet()
     }
 
-    fun applyMap(prediction: AutocompletePrediction) : SearchCity {
+    private fun applyMap(prediction: AutocompletePrediction) : SearchCity {
         return SearchCity(prediction.getFullText(StyleSpan(Typeface.NORMAL)).toString(), prediction.placeId)
     }
  }

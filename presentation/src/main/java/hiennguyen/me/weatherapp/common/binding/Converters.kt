@@ -1,7 +1,7 @@
 package hiennguyen.me.weatherapp.common.binding
 
-import android.databinding.BindingAdapter
-import android.databinding.BindingConversion
+import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingConversion
 import android.view.View
 
 import hiennguyen.me.bindingadapterdelegate.actionhandler.listener.ActionClickListener

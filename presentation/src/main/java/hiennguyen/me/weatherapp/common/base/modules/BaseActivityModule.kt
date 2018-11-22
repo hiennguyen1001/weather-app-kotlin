@@ -1,8 +1,8 @@
 package hiennguyen.me.weatherapp.common.base.modules
 
 import android.content.Context
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.google.android.gms.location.places.Places
 import dagger.Module
 import dagger.Provides
@@ -19,14 +19,14 @@ class BaseActivityModule {
     @Provides
     @PerActivity
     @ActivityContext
-    fun provideActivityContext(activity: FragmentActivity): Context {
+    fun provideActivityContext(activity: androidx.fragment.app.FragmentActivity): Context {
         return activity
     }
 
     @Provides
     @PerActivity
     @ActivityContext
-    fun provideFragmentActivity(activity: FragmentActivity): FragmentActivity {
+    fun provideFragmentActivity(activity: androidx.fragment.app.FragmentActivity): androidx.fragment.app.FragmentActivity {
         return activity
     }
 
@@ -38,12 +38,12 @@ class BaseActivityModule {
 
     @Provides
     @PerActivity
-    fun provideFragmentManager(activity: FragmentActivity): FragmentManager {
+    fun provideFragmentManager(activity: androidx.fragment.app.FragmentActivity): androidx.fragment.app.FragmentManager {
         return activity.supportFragmentManager
     }
 
     @Provides
     @PerActivity
-    fun provideGeoDataClient(activity: FragmentActivity) = Places.getGeoDataClient(activity)
+    fun provideGeoDataClient(activity: androidx.fragment.app.FragmentActivity) = Places.getGeoDataClient(activity)
 
 }

@@ -1,10 +1,10 @@
 package hiennguyen.me.weatherapp.presentation.home.views
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.view.ViewPager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.ViewPager
 import android.view.View
 import hiennguyen.me.weatherapp.R
 import hiennguyen.me.weatherapp.common.base.views.BaseFragment
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
-    lateinit var pager: ViewPager
+    lateinit var pager: androidx.viewpager.widget.ViewPager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,10 +26,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
 
-    class WeatherPagerAdapter(var mFragments: MutableList<Fragment>, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class WeatherPagerAdapter(var mFragments: MutableList<androidx.fragment.app.Fragment>, fm: androidx.fragment.app.FragmentManager) : FragmentStatePagerAdapter(fm) {
 
 
-        override fun getItem(position: Int): Fragment {
+        override fun getItem(position: Int): androidx.fragment.app.Fragment {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
-        fun addItem(frag: Fragment) {
+        fun addItem(frag: androidx.fragment.app.Fragment) {
             mFragments.add(frag)
         }
 

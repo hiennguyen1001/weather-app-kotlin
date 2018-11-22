@@ -1,6 +1,8 @@
 package hiennguyen.me.weatherapp.utils
 
-import android.support.v7.widget.SearchView
+import androidx.databinding.BindingAdapter
+import androidx.appcompat.widget.SearchView
+import android.widget.TextView
 
 
 fun SearchView.setOnQueryTextListener(textSubmit: ((String?) -> Boolean?)? = null, textChanged: ((String?) -> Boolean)? = null) {
@@ -16,4 +18,9 @@ fun SearchView.setOnQueryTextListener(textSubmit: ((String?) -> Boolean?)? = nul
 
     }
     setOnQueryTextListener(listener)
+}
+
+@BindingAdapter("containText")
+fun setContainText(view: TextView, text: String) {
+    view.text = text
 }

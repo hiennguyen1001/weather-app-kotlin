@@ -1,6 +1,6 @@
 package hiennguyen.me.weatherapp.presentation.forecast
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import dagger.Binds
 import dagger.Module
 import hiennguyen.me.weatherapp.common.base.modules.BaseFragmentModule
@@ -12,5 +12,5 @@ abstract class ForecastFragmentModule {
 
     @Binds
     @PerFragment
-    internal abstract fun fragment(foreCastFragment: ForeCastFragment): Fragment
+    internal abstract fun fragment(foreCastFragment: ForeCastFragment): androidx.fragment.app.Fragment
 }

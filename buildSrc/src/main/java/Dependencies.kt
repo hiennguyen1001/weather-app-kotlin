@@ -1,4 +1,3 @@
-import Versions.archPagging
 import Versions.architecture
 import Versions.constraint
 import Versions.dagger2
@@ -19,47 +18,45 @@ import Versions.support
 import Versions.testRunner
 
 object Versions {
-    val kotlin_version = "1.2.31"
-    val buildToolsVersion = "27.0.3"
-    val compileSdkVersion = 27
-    val minSdkVersion = 16
-    val targetSdkVersion = 27
-    val support = "27.1.1"
-    val constraint = "1.0.2"
-    val architecture = "1.1.0"
-    val archPagging = "1.0.0-beta1"
-    val dagger2 = "2.12"
-    val okHttp = "3.9.0"
-    val retrofit = "2.3.0"
-    val stetho = "1.5.0"
-    val gson = "2.8.2"
-    val glide = "4.5.0"
-    val rxJava = "2.1.11"
-    val rxKotlin = "2.2.0"
-    val rxAndroid = "2.0.1"
-    val leakCanary = "1.5.4"
-    val objectboxVersion = "1.4.4"
-    val playServicesVersion = "12.0.0"
+    const val kotlin_version = "1.3.10"
+    const val compileSdkVersion = 28
+    const val minSdkVersion = 16
+    const val targetSdkVersion = 28
+    const val support = "1.0.0"
+    const val constraint = "1.1.2"
+    const val architecture = "2.0.0-rc01"
+    const val dagger2 = "2.19"
+    const val okHttp = "3.9.0"
+    const val retrofit = "2.3.0"
+    const val stetho = "1.5.0"
+    const val gson = "2.8.2"
+    const val glide = "4.8.0"
+    const val rxJava = "2.1.11"
+    const val rxKotlin = "2.2.0"
+    const val rxAndroid = "2.0.1"
+    const val leakCanary = "1.5.4"
+    const val objectboxVersion = "1.4.4"
+    const val playServicesVersion = "12.0.0"
 
 
-    val junit = "4.12"
-    val testRunner = "1.0.1"
-    val espresso = "3.0.1"
-    val multiDex = "1.0.2"
+    const val junit = "4.12"
+    const val testRunner = "1.1.0"
+    const val espresso = "3.1.0"
+    const val multiDex = "2.0.0"
 }
 
 object Deps {
 
-    val supportDeps = arrayOf("com.android.support:appcompat-v7:$support"
-            , "com.android.support.constraint:constraint-layout:$constraint"
-            , "com.android.support:design:$support"
-            , "com.android.support:recyclerview-v7:$support"
-            , "com.android.support:multidex:$multiDex"
+    val supportDeps = arrayOf("androidx.appcompat:appcompat:$support"
+            , "androidx.constraintlayout:constraintlayout:$constraint"
+            , "com.google.android.material:material:1.0.0-rc01"
+            , "androidx.recyclerview:recyclerview:$support"
+            , "androidx.multidex:multidex:$multiDex"
     )
 
     val archDeps = arrayOf(
-            "android.arch.lifecycle:extensions:$architecture"
-            , "android.arch.paging:runtime:$archPagging"
+            "androidx.lifecycle:lifecycle-extensions:$architecture"
+            , "androidx.paging:paging-runtime:$architecture"
     )
 
     val dagger = arrayOf(
@@ -99,7 +96,7 @@ object Deps {
             "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary")
 
     val annotationProccessor = arrayOf(
-            "android.arch.lifecycle:compiler:$architecture"
+            "androidx.lifecycle:lifecycle-compiler:$architecture"
             , "com.google.dagger:dagger-compiler:$dagger2"
             , "com.google.dagger:dagger-android-processor:$dagger2"
             , "com.github.bumptech.glide:compiler:$glide"
@@ -107,8 +104,8 @@ object Deps {
 
     val unitTest = arrayOf("junit:junit:${Versions.junit}")
 
-    val androidTest = arrayOf("com.android.support.test:runner:$testRunner"
-            , "com.android.support.test.espresso:espresso-core:$espresso")
+    val androidTest = arrayOf("androidx.test:runner:$testRunner"
+            , "androidx.test.espresso:espresso-core:$espresso")
 
     val otherLibs = arrayOf(glideLibs, glideOkhttp, bindingList, circleimage, indicatore)
     val placeLib = "com.google.android.gms:play-services-places:$playServicesVersion"

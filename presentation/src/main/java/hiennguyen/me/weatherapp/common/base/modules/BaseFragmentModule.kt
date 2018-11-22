@@ -1,7 +1,7 @@
 package hiennguyen.me.weatherapp.common.base.modules
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -24,7 +24,7 @@ abstract class BaseFragmentModule {
 
         @Provides
         @PerFragment
-        fun childFragmentManager(fragment: Fragment): FragmentManager {
+        fun childFragmentManager(fragment: androidx.fragment.app.Fragment): androidx.fragment.app.FragmentManager {
             return fragment.childFragmentManager
         }
     }

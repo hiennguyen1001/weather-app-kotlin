@@ -1,6 +1,6 @@
 package hiennguyen.me.weatherapp.presentation.home
 
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -18,7 +18,7 @@ abstract class HomeActivityModule {
 
     @Binds
     @PerActivity
-    abstract fun activity(homeActivity: HomeActivity): FragmentActivity
+    abstract fun activity(homeActivity: HomeActivity): androidx.fragment.app.FragmentActivity
 
     @PerFragment
     @ContributesAndroidInjector(modules = [(HomeFragmentModule::class)])

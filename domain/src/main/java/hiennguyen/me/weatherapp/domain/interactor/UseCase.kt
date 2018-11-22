@@ -3,10 +3,6 @@ package hiennguyen.me.weatherapp.domain.interactor
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Action
-import io.reactivex.functions.Consumer
-import io.reactivex.internal.functions.Functions
-import io.reactivex.rxkotlin.subscribeBy
 
 
 abstract class UseCase<T: Any, Params> {
@@ -33,7 +29,7 @@ abstract class UseCase<T: Any, Params> {
     }
 
     fun dispose() {
-        if (!mDisposables.isDisposed()) {
+        if (!mDisposables.isDisposed) {
             mDisposables.dispose()
         }
     }

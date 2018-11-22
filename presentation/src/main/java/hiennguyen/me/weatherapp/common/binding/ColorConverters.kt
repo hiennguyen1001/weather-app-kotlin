@@ -1,10 +1,10 @@
 package hiennguyen.me.weatherapp.common.binding
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.graphics.drawable.GradientDrawable
-import android.support.annotation.ColorRes
-import android.support.annotation.DimenRes
-import android.support.v4.content.ContextCompat
+import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
+import androidx.core.content.ContextCompat
 import android.view.View
 import android.widget.TextView
 import hiennguyen.me.weatherapp.R

@@ -1,6 +1,6 @@
 package hiennguyen.me.weatherapp.common.binding
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView

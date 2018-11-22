@@ -1,6 +1,6 @@
 package hiennguyen.me.weatherapp.presentation.home
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 
 
 import dagger.Binds
@@ -14,5 +14,5 @@ abstract class HomeFragmentModule {
 
     @Binds
     @PerFragment
-    internal abstract fun fragment(mainFragment: HomeFragment): Fragment
+    internal abstract fun fragment(mainFragment: HomeFragment): androidx.fragment.app.Fragment
 }

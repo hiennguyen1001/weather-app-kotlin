@@ -1,9 +1,9 @@
 package hiennguyen.me.weatherapp.presentation.search
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.view.View
 import hiennguyen.me.bindingadapterdelegate.ListConfig
 import hiennguyen.me.bindingadapterdelegate.actionhandler.ActionHandler

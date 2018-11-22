@@ -1,6 +1,6 @@
 package hiennguyen.me.weatherapp.presentation.search
 
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.location.places.AutocompletePrediction
 import com.google.android.gms.location.places.AutocompletePredictionBufferResponse
 import com.google.android.gms.tasks.Task
@@ -17,6 +17,6 @@ abstract class LocationSearchActivityModule {
 
     @Binds
     @PerActivity
-    abstract fun activity(searchActivity: LocationSearchActivity): FragmentActivity
+    abstract fun activity(searchActivity: LocationSearchActivity): androidx.fragment.app.FragmentActivity
 
 }

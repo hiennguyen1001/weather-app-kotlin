@@ -5,9 +5,10 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'io.objectbox'
 apply from: '../code_quality_tools/quality.gradle'
 
+
+
 android {
     compileSdkVersion Versions.compileSdkVersion
-    buildToolsVersion Versions.buildToolsVersion
 
     defaultConfig {
 
@@ -25,7 +26,7 @@ android {
         targetSdkVersion Versions.targetSdkVersion
         versionCode Configs.versionCode
         versionName Configs.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
 
@@ -86,6 +87,8 @@ dependencies {
     releaseImplementation Deps.onlyRelease
 
     kapt Deps.annotationProccessor
+    kapt 'com.android.tools.build.jetifier:jetifier-core:1.0.0-beta02'
+    annotationProcessor 'com.android.tools.build.jetifier:jetifier-core:1.0.0-beta02'
 
     testImplementation Deps.unitTest
     androidTestImplementation Deps.androidTest

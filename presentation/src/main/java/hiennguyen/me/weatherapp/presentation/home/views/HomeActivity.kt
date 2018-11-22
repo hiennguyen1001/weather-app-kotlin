@@ -1,8 +1,8 @@
 package hiennguyen.me.weatherapp.presentation.home.views
 
 import android.os.Bundle
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
 import hiennguyen.me.weatherapp.R
 import hiennguyen.me.weatherapp.common.base.views.BaseActivity
 import hiennguyen.me.weatherapp.databinding.ActivityHomeBinding

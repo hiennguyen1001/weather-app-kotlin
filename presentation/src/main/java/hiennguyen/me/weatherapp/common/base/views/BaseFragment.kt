@@ -1,21 +1,19 @@
 package hiennguyen.me.weatherapp.common.base.views
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.DaggerFragment
 import dagger.android.support.HasSupportFragmentInjector
 import hiennguyen.me.weatherapp.presentation.navigators.FragmentNavigator
 import java.lang.reflect.ParameterizedType
@@ -27,21 +25,21 @@ abstract class BaseFragment<V : ViewDataBinding, M: ViewModel> : Fragment(), Has
     protected lateinit var binding: V
     protected lateinit var viewModel: M
     @Inject
-    protected lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
+    protected lateinit var childFragmentInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
     @Inject
     protected lateinit var mFactory: ViewModelProvider.Factory
 
     @Inject
     protected lateinit var mNavigator: FragmentNavigator
     @Inject
-    protected lateinit var mChildFragmentManager: FragmentManager
+    protected lateinit var mChildFragmentManager: androidx.fragment.app.FragmentManager
 
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment> {
         return childFragmentInjector
     }
 

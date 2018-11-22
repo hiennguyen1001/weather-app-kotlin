@@ -1,7 +1,8 @@
 package hiennguyen.me.weatherapp.presentation.search.viewmodels
 
+import android.annotation.SuppressLint
 import android.app.Application
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.places.AutocompleteFilter
 import com.google.android.gms.location.places.AutocompleteFilter.TYPE_FILTER_CITIES
 import com.google.android.gms.location.places.GeoDataClient
@@ -15,7 +16,6 @@ import hiennguyen.me.weatherapp.utils.LogWraper
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-
 
 class SearchViewModel @Inject constructor(application: Application, private val geoDataClient: GeoDataClient,
                                           private val searchCityUseCase: SearchCityUseCase) : BaseViewModel(application) {
@@ -32,6 +32,7 @@ class SearchViewModel @Inject constructor(application: Application, private val 
         searchPublishSubject.accept(key)
     }
 
+    @SuppressLint("CheckResult")
     private fun initSearchPublishSubject() {
         searchPublishSubject
                 .debounce(300, TimeUnit.MILLISECONDS)

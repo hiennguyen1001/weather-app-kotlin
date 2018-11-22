@@ -1,8 +1,8 @@
 package hiennguyen.me.weatherapp.common.base.viewmodels
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.databinding.ObservableBoolean
+import androidx.lifecycle.AndroidViewModel
+import androidx.databinding.ObservableBoolean
 import io.objectbox.BoxStore
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject

@@ -6,10 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.os.Parcelable
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 
 open class ActivityNavigator @Inject
-constructor(private val activity: FragmentActivity?) : Navigator {
+constructor(private val activity: androidx.fragment.app.FragmentActivity?) : Navigator {
 
     override fun finishActivity() {
         activity?.finish()
@@ -79,25 +79,25 @@ constructor(private val activity: FragmentActivity?) : Navigator {
         startActivityInternal(activityClass, { intent -> intent.putExtra(Navigator.EXTRA_ARG, arg) }, requestCode)
     }
 
-    override fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, args: Bundle) {
+    override fun replaceFragment(@IdRes containerId: Int, fragment: androidx.fragment.app.Fragment, args: Bundle) {
         replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, args = args)
     }
 
-    override fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String, args: Bundle) {
+    override fun replaceFragment(@IdRes containerId: Int, fragment: androidx.fragment.app.Fragment, fragmentTag: String, args: Bundle) {
         replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, fragmentTag, args)
     }
 
-    override fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment,
+    override fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: androidx.fragment.app.Fragment,
                                                   args: Bundle, backstackTag: String) {
         replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, args = args, addToBackstack = true, backstackTag = backstackTag)
     }
 
-    override fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment,
+    override fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: androidx.fragment.app.Fragment,
                                                   fragmentTag: String, args: Bundle, backstackTag: String) {
         replaceFragmentInternal(activity?.supportFragmentManager, containerId, fragment, fragmentTag, args, true, backstackTag)
     }
 
-    internal fun replaceFragmentInternal(fm: FragmentManager?, @IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null,
+    internal fun replaceFragmentInternal(fm: androidx.fragment.app.FragmentManager?, @IdRes containerId: Int, fragment: androidx.fragment.app.Fragment, fragmentTag: String? = null,
                                          args: Bundle? = null, addToBackstack: Boolean = false, backstackTag: String? = "") {
 
         args?.let { fragment.arguments = it }

@@ -1,13 +1,13 @@
 package hiennguyen.me.weatherapp.common.base.views
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.appcompat.app.AppCompatActivity
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -24,11 +24,11 @@ abstract class BaseActivity<V : ViewDataBinding, M : BaseViewModel> : AppCompatA
     protected lateinit var binding: V
     protected lateinit var viewModel: M
 
-    @Inject lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject lateinit var supportFragmentInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
     @Inject lateinit var frameworkFragmentInjector: DispatchingAndroidInjector<android.app.Fragment>
 
     @Inject protected lateinit var navigator: Navigator
-    @Inject protected lateinit var mFragmentManager: FragmentManager
+    @Inject protected lateinit var mFragmentManager: androidx.fragment.app.FragmentManager
     @Inject lateinit var mFactory: ViewModelProvider.Factory
 
 
@@ -39,7 +39,7 @@ abstract class BaseActivity<V : ViewDataBinding, M : BaseViewModel> : AppCompatA
         viewModel = ViewModelProviders.of(this, mFactory).get(viewModelClass())
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment>? {
+    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment>? {
         return supportFragmentInjector
     }
 
