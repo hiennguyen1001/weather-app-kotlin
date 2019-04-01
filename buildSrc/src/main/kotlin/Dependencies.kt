@@ -18,14 +18,14 @@ import Versions.support
 import Versions.testRunner
 
 object Versions {
-    const val kotlin_version = "1.3.10"
+    const val kotlin_version = "1.3.21"
     const val compileSdkVersion = 28
     const val minSdkVersion = 16
     const val targetSdkVersion = 28
     const val support = "1.0.0"
     const val constraint = "1.1.2"
-    const val architecture = "2.0.0-rc01"
-    const val dagger2 = "2.19"
+    const val architecture = "2.0.0"
+    const val dagger2 = "2.16"
     const val okHttp = "3.9.0"
     const val retrofit = "2.3.0"
     const val stetho = "1.5.0"
@@ -57,6 +57,8 @@ object Deps {
     val archDeps = arrayOf(
             "androidx.lifecycle:lifecycle-extensions:$architecture"
             , "androidx.paging:paging-runtime:$architecture"
+            , "androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0-alpha01"
+            , "androidx.activity:activity-ktx:1.0.0-alpha05"
     )
 
     val dagger = arrayOf(
@@ -100,7 +102,8 @@ object Deps {
             , "com.google.dagger:dagger-compiler:$dagger2"
             , "com.google.dagger:dagger-android-processor:$dagger2"
             , "com.github.bumptech.glide:compiler:$glide"
-            , "io.objectbox:objectbox-processor:$objectboxVersion")
+            , "io.objectbox:objectbox-processor:$objectboxVersion"
+            , "com.android.tools.build.jetifier:jetifier-core:1.0.0-beta04")
 
     val unitTest = arrayOf("junit:junit:${Versions.junit}")
 

@@ -2,7 +2,7 @@ version: 2
 jobs:
   accept_library_licenses:
             docker:
-              - image: circleci/android:api-25-alpha
+              - image: circleci/android:api-28
               - image: bitriseio/android-ndk:v2018_04_21-09_12-b976
             working_directory: ~/weather-app-kotlin
             environment:
@@ -12,13 +12,13 @@ jobs:
               - run: cp -r licenses/. $ANDROID_HOME/licenses
   running_code_quality_tools:
       docker:
-        - image: circleci/android:api-25-alpha
+        - image: circleci/android:api-28
       environment:
         JVM_OPTS: -Xmx4G
       steps:
         - checkout
         - restore_cache:
-            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+            key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "presentation/build.gradle.kts" }}
         - run: echo "Verify from this branch ${CIRCLE_BRANCH}"
         - run:
             name: Chmod permissions
@@ -32,7 +32,7 @@ jobs:
         - save_cache:
             paths:
               - ~/.gradle
-            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+            key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "presentation/build.gradle.kts" }}
         - run:
             name: Run code quality tools
             command: ./gradlew ktlintCheck
@@ -51,7 +51,7 @@ jobs:
         steps:
           - checkout
           - restore_cache:
-              key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+              key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "presentation/build.gradle.kts" }}
           - run:
              name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
              command: sudo chmod +x ./gradlew
@@ -64,7 +64,7 @@ jobs:
           - save_cache:
               paths:
                 - ~/.gradle
-              key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+              key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "presentation/build.gradle.kts" }}
           - run:
               name: Run Presentation Module Unit Tests
               command: ./gradlew :presentation:testDebugUnitTest
@@ -99,7 +99,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+          key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "presentation/build.gradle.kts" }}
       - run:
          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
          command: sudo chmod +x ./gradlew
@@ -112,7 +112,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+          key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "presentation/build.gradle.kts" }}
       - run:
           name: Disable Gradle Daemon
           command: mkdir -p ~/.gradle && echo "org.gradle.daemon=false" >> ~/.gradle/gradle.properties
