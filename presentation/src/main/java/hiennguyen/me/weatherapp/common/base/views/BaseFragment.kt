@@ -34,7 +34,7 @@ abstract class BaseFragment<V : ViewDataBinding, M: ViewModel> : Fragment(), Has
     @Inject
     protected lateinit var mChildFragmentManager: androidx.fragment.app.FragmentManager
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
