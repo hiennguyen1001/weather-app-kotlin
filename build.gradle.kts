@@ -17,7 +17,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:3.3.2")
         classpath(kotlin("gradle-plugin", version = Versions.kotlin_version))
         classpath("io.objectbox:objectbox-gradle-plugin:${Versions.objectboxVersion}")
-        classpath("gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:3.3.0")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:7.2.1")
         classpath("com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta04")
     }
 }
@@ -37,4 +37,3 @@ gradle.projectsEvaluated {
         options.compilerArgs = kotlin.collections.arrayListOf("-Xmaxerrs", "500")
     }
 }
-

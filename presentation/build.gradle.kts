@@ -1,17 +1,5 @@
 import org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension
-
-repositories {
-    google()
-    maven {
-        url = uri("https://maven.google.com/")
-        name = "Google"
-    }
-    jcenter()
-    maven {
-        url = uri("https://plugins.gradle.org/m2/")
-    }
-
-}
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     id("com.android.application")
@@ -19,6 +7,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("io.objectbox")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -107,3 +96,8 @@ dependencies {
     androidTestImplementation(Deps.androidTest)
 }
 
+ktlint {
+    version.set("0.31.0")
+    ignoreFailures.set(true)
+    reporters.set(setOf(ReporterType.CHECKSTYLE))
+}

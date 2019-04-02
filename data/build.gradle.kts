@@ -1,9 +1,12 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
     id("io.objectbox")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -34,4 +37,10 @@ dependencies {
     api(Deps.objectBox)
     api(Deps.javaInject)
     testImplementation(Deps.unitTest)
+}
+
+ktlint {
+    version.set("0.31.0")
+    ignoreFailures.set(true)
+    reporters.set(setOf(ReporterType.CHECKSTYLE))
 }
